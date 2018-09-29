@@ -30,7 +30,7 @@ query {
 }
 GRAPHQL;
 
-$response = $client->post('http://localhost:8080', [
+$response = $client->post('http://graphql:8080', [
     'json' => [
         'query' => $query
     ]

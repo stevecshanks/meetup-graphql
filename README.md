@@ -5,14 +5,18 @@ Learning GraphQL by creating an API for a Meetup.com clone.
 ## Usage
 
 ```shell
-# Run API
-php -S localhost:8080 graphql.php
-
-# Run frontend
-php -S localhost:8081 frontend.php
+docker-compose up
 ```
 
-## Example Query
+## Frontend
+
+http://localhost:8081/
+
+## GraphQL
+
+http://localhost:8080/
+
+### Example Query
 
 ```graphql
 query {

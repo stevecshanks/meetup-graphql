@@ -1,0 +1,18 @@
+version: "3"
+services:
+  graphql:
+    image: php:7.2-cli
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: php -S 0.0.0.0:8080 graphql.php
+  frontend:
+    image: php:7.2-cli
+    ports:
+      - "8081:8080"
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: php -S 0.0.0.0:8080 frontend.php
