@@ -19,11 +19,23 @@ $personType = new ObjectType([
     ]
 ]);
 
+$addressType = new ObjectType([
+    'name' => 'Address',
+    'fields' => [
+        'companyName' => Type::string(),
+        'address' => Type::string(),
+        'city' => Type::string(),
+        'postcode' => Type::string(),
+    ]
+]);
+
 $meetupType = new ObjectType([
     'name' => 'Meetup',
     'fields' => [
         'id' => Type::id(),
         'name' => Type::string(),
+        'location' => $addressType,
+        'start' => Type::string(),
         'organiser' => $personType,
         'presenter' => $personType,
         'attendees' => Type::listOf($personType),
