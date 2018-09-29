@@ -1,0 +1,30 @@
+schema {
+  query: Query
+}
+
+type Query {
+  meetups: [Meetup]!
+}
+
+type Meetup {
+  id: ID!
+  name: String!
+  location: Address!
+  start: String!
+  organiser: Person!
+  presenter: Person!
+  attendees: [Person]!
+}
+
+type Address {
+  companyName: String!
+  address: String!
+  city: String!
+  postcode: String!
+}
+
+type Person {
+  id: ID!
+  name: String!
+  companyName: String
+}
