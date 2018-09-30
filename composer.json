@@ -3,7 +3,8 @@
         "webonyx/graphql-php": "^0.12.6",
         "fzaninotto/faker": "^1.8",
         "guzzlehttp/guzzle": "^6.3",
-        "twig/twig": "^2.0"
+        "twig/twig": "^2.0",
+        "mongodb/mongodb": "^1.4"
     },
     "autoload": {
         "psr-4": {

@@ -6,7 +6,7 @@ use GraphQL\Utils\BuildSchema;
 use GraphQL\GraphQL;
 use GraphQL\Error\Debug;
 use MeetupQL\GraphQL\FieldResolver;
-use MeetupQL\Domain\MeetupRepository;
+use MeetupQL\Domain\FakeMeetupRepository;
 
 $contents = file_get_contents(__DIR__ . '/schema.graphql');
 $schema = BuildSchema::build($contents);
@@ -15,7 +15,7 @@ $rawInput = file_get_contents('php://input');
 $input = json_decode($rawInput, true);
 $query = $input['query'];
 
-$meetupRepository = new MeetupRepository();
+$meetupRepository = new FakeMeetupRepository();
 
 $rootValue = [
     'meetups' => function () use ($meetupRepository) {
