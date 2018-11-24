@@ -3,7 +3,8 @@ schema {
 }
 
 type Query {
-  meetups: [Meetup]!
+  meetups: [Meetup],
+  people: [Person]
 }
 
 type Meetup {

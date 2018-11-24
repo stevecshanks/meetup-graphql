@@ -6,6 +6,7 @@ use GraphQL\Utils\BuildSchema;
 use GraphQL\GraphQL;
 use GraphQL\Error\Debug;
 use MeetupQL\Database\MongoDbMeetupRepository;
+use MeetupQL\Database\MongoDbPersonRepository;
 use MeetupQL\GraphQL\FieldResolver;
 use MongoDB\Client;
 
@@ -18,11 +19,15 @@ $query = $input['query'];
 
 $mongoDbClient = new Client('mongodb://mongodb');
 $meetupRepository = new MongoDbMeetupRepository($mongoDbClient);
+$personRepository = new MongoDbPersonRepository($mongoDbClient);
 
 $rootValue = [
     'meetups' => function () use ($meetupRepository) {
         return $meetupRepository->findAll();
     },
+    'people' => function () use ($personRepository) {
+        return $personRepository->findAll();
+    }
 ];
 
 try {
