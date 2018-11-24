@@ -4,7 +4,7 @@ namespace MeetupQL\Domain;
 
 final class Person
 {
-    /** @var int */
+    /** @var string */
     private $id;
 
     /** @var string */
@@ -15,11 +15,11 @@ final class Person
 
     /**
      * Person constructor.
-     * @param int $id
+     * @param string $id
      * @param string $name
      * @param null|string $companyName
      */
-    public function __construct(int $id, string $name, ?string $companyName = null)
+    public function __construct(string $id, string $name, ?string $companyName = null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -27,9 +27,9 @@ final class Person
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }

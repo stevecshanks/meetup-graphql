@@ -5,6 +5,7 @@ namespace MeetupQL\Domain;
 use Faker\Factory;
 use Faker\Generator;
 use Faker\Provider\en_GB\Address as FakerAddress;
+use MeetupQL\GraphQL\IdService;
 
 class DataGenerator
 {
@@ -31,7 +32,7 @@ class DataGenerator
     public function randomPerson(): Person
     {
         return new Person(
-            $this->faker->unique()->randomNumber(),
+            $this->randomIdFor('Person'),
             $this->faker->name,
             random_int(0, 1) ? $this->faker->company : null
         );
@@ -50,7 +51,7 @@ class DataGenerator
     public function randomMeetup(): Meetup
     {
         return new Meetup(
-            $this->faker->unique()->randomNumber(),
+            $this->randomIdFor('Meetup'),
             ucwords($this->faker->catchPhrase),
             $this->randomAddress(),
             $this->faker->dateTimeThisYear->format('Y-m-d\TH:30:00O'),
@@ -58,5 +59,10 @@ class DataGenerator
             $this->randomPerson(),
             $this->collectionOf(random_int(0, 5), 'randomPerson')
         );
+    }
+
+    private function randomIdFor(string $type): string
+    {
+        return IdService::encode($type, $this->faker->unique()->randomNumber());
     }
 }
