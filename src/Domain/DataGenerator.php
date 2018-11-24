@@ -18,12 +18,12 @@ class DataGenerator
         $this->faker->addProvider(new FakerAddress($this->faker));
     }
 
-    public function collectionOf(int $numberOfEntries, string $generatorFunctionName): array
+    public function collectionOf(int $numberOfEntries, callable $generatorFunction): array
     {
         $results = [];
 
         for ($i = 0; $i < $numberOfEntries; $i++) {
-            $results[] = $this->{$generatorFunctionName}();
+            $results[] = $generatorFunction();
         }
 
         return $results;
@@ -38,7 +38,31 @@ class DataGenerator
         );
     }
 
-    public function randomAddress(): Address
+    /**
+     * @param Person[] $people
+     * @return Meetup
+     */
+    public function randomMeetup(array $people): Meetup
+    {
+        return new Meetup(
+            $this->randomIdFor('Meetup'),
+            ucwords($this->faker->catchPhrase),
+            $this->randomAddress(),
+            $this->faker->dateTimeThisYear->format('Y-m-d\TH:30:00O'),
+            $this->randomPersonFrom($people),
+            $this->randomPersonFrom($people),
+            $this->collectionOf(random_int(0, 5), function () use ($people) {
+                return $this->randomPersonFrom($people);
+            })
+        );
+    }
+
+    private function randomIdFor(string $type): string
+    {
+        return IdService::encode($type, $this->faker->unique()->randomNumber());
+    }
+
+    private function randomAddress(): Address
     {
         return new Address(
             $this->faker->company,
@@ -48,21 +72,8 @@ class DataGenerator
         );
     }
 
-    public function randomMeetup(): Meetup
+    private function randomPersonFrom(array $people): Person
     {
-        return new Meetup(
-            $this->randomIdFor('Meetup'),
-            ucwords($this->faker->catchPhrase),
-            $this->randomAddress(),
-            $this->faker->dateTimeThisYear->format('Y-m-d\TH:30:00O'),
-            $this->randomPerson(),
-            $this->randomPerson(),
-            $this->collectionOf(random_int(0, 5), 'randomPerson')
-        );
-    }
-
-    private function randomIdFor(string $type): string
-    {
-        return IdService::encode($type, $this->faker->unique()->randomNumber());
+        return $people[array_rand($people)];
     }
 }
