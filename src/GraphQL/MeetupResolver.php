@@ -5,7 +5,7 @@ namespace MeetupQL\GraphQL;
 use MeetupQL\Domain\Meetup;
 use MeetupQL\Domain\PersonRepository;
 
-class MeetupResolver extends FieldResolver
+class MeetupResolver extends DefaultResolver
 {
     /** @var PersonRepository */
     private $personRepository;

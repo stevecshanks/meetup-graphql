@@ -7,7 +7,7 @@ use GraphQL\GraphQL;
 use GraphQL\Error\Debug;
 use MeetupQL\Database\MongoDbMeetupRepository;
 use MeetupQL\Database\MongoDbPersonRepository;
-use MeetupQL\GraphQL\FieldResolver;
+use MeetupQL\GraphQL\DefaultResolver;
 use MeetupQL\GraphQL\MeetupResolver;
 use MeetupQL\GraphQL\QueryResolver;
 use MeetupQL\GraphQL\ResolverRegistry;
@@ -36,7 +36,7 @@ try {
         null,
         null,
         null,
-        new FieldResolver($resolverRegistry)
+        new DefaultResolver($resolverRegistry)
     );
     $output = $result->toArray(Debug::INCLUDE_DEBUG_MESSAGE | Debug::INCLUDE_TRACE);
 } catch (Exception $e) {

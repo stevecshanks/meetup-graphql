@@ -5,7 +5,7 @@ namespace MeetupQL\GraphQL;
 use GraphQL\Executor\Executor;
 use GraphQL\Type\Definition\ResolveInfo;
 
-class FieldResolver implements Resolver
+class DefaultResolver implements Resolver
 {
     /** @var ResolverRegistry */
     private $resolverRegistry;
