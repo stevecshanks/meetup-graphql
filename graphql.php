@@ -9,6 +9,7 @@ use MeetupQL\Database\MongoDbMeetupRepository;
 use MeetupQL\Database\MongoDbPersonRepository;
 use MeetupQL\GraphQL\DefaultResolver;
 use MeetupQL\GraphQL\MeetupResolver;
+use MeetupQL\GraphQL\PersonResolver;
 use MeetupQL\GraphQL\QueryResolver;
 use MeetupQL\GraphQL\ResolverRegistry;
 use MongoDB\Client;
@@ -27,6 +28,7 @@ $personRepository = new MongoDbPersonRepository($mongoDbClient);
 $resolverRegistry = new ResolverRegistry();
 $resolverRegistry->add('Query', new QueryResolver($resolverRegistry, $meetupRepository, $personRepository));
 $resolverRegistry->add('Meetup', new MeetupResolver($resolverRegistry, $personRepository));
+$resolverRegistry->add('Person', new PersonResolver($resolverRegistry, $meetupRepository));
 
 try {
     $result = GraphQL::executeQuery(

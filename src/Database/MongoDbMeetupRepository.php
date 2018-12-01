@@ -5,6 +5,7 @@ namespace MeetupQL\Database;
 use MeetupQL\Domain\Address;
 use MeetupQL\Domain\Meetup;
 use MeetupQL\Domain\MeetupRepository;
+use MeetupQL\Domain\Person;
 use MongoDB\Client;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;
@@ -38,6 +39,14 @@ class MongoDbMeetupRepository implements MeetupRepository
     public function add(Meetup $meetup): void
     {
         $this->collection->insertOne($this->meetupToArray($meetup));
+    }
+
+    public function findByAttendee(Person $person): array
+    {
+        $documentIterator = $this->collection->find([
+            'attendee_ids' => $person->getId()
+        ]);
+        return array_map([$this, 'documentToMeetup'], iterator_to_array($documentIterator));
     }
 
     protected function meetupToArray(Meetup $meetup): array

@@ -29,4 +29,5 @@ type Person {
   name: String!
   companyName: String
   interests: [String]!
+  meetupsAttending: [Meetup]!
 }

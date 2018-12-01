@@ -14,7 +14,7 @@ $meetupRepository = new MongoDbMeetupRepository($mongoDbClient);
 
 $generator = new DataGenerator();
 
-foreach ($generator->collectionOf(50, [$generator, 'randomPerson']) as $person) {
+foreach ($generator->collectionOf(20, [$generator, 'randomPerson']) as $person) {
     $personRepository->add($person);
 }
 
