@@ -16,14 +16,14 @@ class Meetup
     /** @var string */
     private $start;
 
-    /** @var Person */
-    private $organiser;
+    /** @var string */
+    private $organiserId;
 
-    /** @var Person */
-    private $presenter;
+    /** @var string */
+    private $presenterId;
 
-    /** @var Person[] */
-    private $attendees;
+    /** @var string[] */
+    private $attendeeIds;
 
     /**
      * Meetup constructor.
@@ -31,26 +31,26 @@ class Meetup
      * @param string $name
      * @param Address $location
      * @param string $start
-     * @param Person $organiser
-     * @param Person $presenter
-     * @param Person[] $attendees
+     * @param string $organiserId
+     * @param string $presenterId
+     * @param string[] $attendeeIds
      */
     public function __construct(
         string $id,
         string $name,
         Address $location,
         string $start,
-        Person $organiser,
-        Person $presenter,
-        array $attendees
+        string $organiserId,
+        string $presenterId,
+        array $attendeeIds
     ) {
         $this->id = $id;
         $this->name = $name;
         $this->location = $location;
         $this->start = $start;
-        $this->organiser = $organiser;
-        $this->presenter = $presenter;
-        $this->attendees = $attendees;
+        $this->organiserId = $organiserId;
+        $this->presenterId = $presenterId;
+        $this->attendeeIds = $attendeeIds;
     }
 
     /**
@@ -86,26 +86,26 @@ class Meetup
     }
 
     /**
-     * @return Person
+     * @return string
      */
-    public function getOrganiser(): Person
+    public function getOrganiserId(): string
     {
-        return $this->organiser;
+        return $this->organiserId;
     }
 
     /**
-     * @return Person
+     * @return string
      */
-    public function getPresenter(): Person
+    public function getPresenterId(): string
     {
-        return $this->presenter;
+        return $this->presenterId;
     }
 
     /**
-     * @return Person[]
+     * @return string[]
      */
-    public function getAttendees(): array
+    public function getAttendeeIds(): array
     {
-        return $this->attendees;
+        return $this->attendeeIds;
     }
 }

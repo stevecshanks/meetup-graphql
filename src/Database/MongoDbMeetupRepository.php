@@ -5,7 +5,6 @@ namespace MeetupQL\Database;
 use MeetupQL\Domain\Address;
 use MeetupQL\Domain\Meetup;
 use MeetupQL\Domain\MeetupRepository;
-use MeetupQL\Domain\Person;
 use MongoDB\Client;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;
@@ -48,9 +47,9 @@ class MongoDbMeetupRepository implements MeetupRepository
             'name' => $meetup->getName(),
             'start' => $meetup->getStart(),
             'location' => $this->addressToArray($meetup->getLocation()),
-            'organiser' => $this->personToArray($meetup->getOrganiser()),
-            'presenter' => $this->personToArray($meetup->getPresenter()),
-            'attendees' => array_map([$this, 'personToArray'], $meetup->getAttendees()),
+            'organiser_id' => $meetup->getOrganiserId(),
+            'presenter_id' => $meetup->getPresenterId(),
+            'attendee_ids' => $meetup->getAttendeeIds(),
         ];
     }
 
@@ -64,15 +63,6 @@ class MongoDbMeetupRepository implements MeetupRepository
         ];
     }
 
-    protected function personToArray(Person $person)
-    {
-        return [
-            'id' => $person->getId(),
-            'name' => $person->getName(),
-            'companyName' => $person->getCompanyName(),
-        ];
-    }
-
     protected function documentToMeetup(BSONDocument $document): Meetup
     {
         return new Meetup(
@@ -80,9 +70,9 @@ class MongoDbMeetupRepository implements MeetupRepository
             $document['name'],
             $this->documentToAddress($document['location']),
             $document['start'],
-            $this->documentToPerson($document['organiser']),
-            $this->documentToPerson($document['presenter']),
-            array_map([$this, 'documentToPerson'], $document['attendees']->getArrayCopy())
+            $document['organiser_id'],
+            $document['presenter_id'],
+            $document['attendee_ids']->getArrayCopy()
         );
     }
 
@@ -93,15 +83,6 @@ class MongoDbMeetupRepository implements MeetupRepository
             $document['address'],
             $document['city'],
             $document['postcode']
-        );
-    }
-
-    protected function documentToPerson(BSONDocument $document)
-    {
-        return new Person(
-            $document['id'],
-            $document['name'],
-            $document['companyName']
         );
     }
 }

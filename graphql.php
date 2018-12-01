@@ -8,6 +8,8 @@ use GraphQL\Error\Debug;
 use MeetupQL\Database\MongoDbMeetupRepository;
 use MeetupQL\Database\MongoDbPersonRepository;
 use MeetupQL\GraphQL\FieldResolver;
+use MeetupQL\GraphQL\MeetupResolver;
+use MeetupQL\GraphQL\ResolverRegistry;
 use MongoDB\Client;
 
 $contents = file_get_contents(__DIR__ . '/schema.graphql');
@@ -30,6 +32,9 @@ $rootValue = [
     }
 ];
 
+$resolverRegistry = new ResolverRegistry();
+$resolverRegistry->add('Meetup', new MeetupResolver($resolverRegistry, $personRepository));
+
 try {
     $result = GraphQL::executeQuery(
         $schema,
@@ -38,7 +43,7 @@ try {
         null,
         null,
         null,
-        new FieldResolver()
+        new FieldResolver($resolverRegistry)
     );
     $output = $result->toArray(Debug::INCLUDE_DEBUG_MESSAGE | Debug::INCLUDE_TRACE);
 } catch (Exception $e) {

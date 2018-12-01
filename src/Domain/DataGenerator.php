@@ -49,10 +49,10 @@ class DataGenerator
             ucwords($this->faker->catchPhrase),
             $this->randomAddress(),
             $this->faker->dateTimeThisYear->format('Y-m-d\TH:30:00O'),
-            $this->randomPersonFrom($people),
-            $this->randomPersonFrom($people),
+            $this->randomPersonFrom($people)->getId(),
+            $this->randomPersonFrom($people)->getId(),
             $this->collectionOf(random_int(0, 5), function () use ($people) {
-                return $this->randomPersonFrom($people);
+                return $this->randomPersonFrom($people)->getId();
             })
         );
     }

@@ -10,4 +10,9 @@ interface PersonRepository
     public function findAll(): array;
 
     public function add(Person $person): void;
+
+    /**
+     * @return Person
+     */
+    public function findById(string $id): Person;
 }

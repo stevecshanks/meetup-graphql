@@ -2,6 +2,7 @@
 
 namespace MeetupQL\Database;
 
+use MeetupQL\Domain\Meetup;
 use MeetupQL\Domain\Person;
 use MeetupQL\Domain\PersonRepository;
 use MongoDB\Client;
@@ -37,6 +38,16 @@ class MongoDbPersonRepository implements PersonRepository
     public function add(Person $person): void
     {
         $this->collection->insertOne($this->personToArray($person));
+    }
+
+    public function findById(string $id): Person
+    {
+        $document = $this->collection->findOne(['id' => $id]);
+        if (!$document) {
+            throw new \InvalidArgumentException("Person with ID {$id} not found");
+        }
+
+        return $this->documentToPerson($document);
     }
 
     protected function personToArray(Person $person)
