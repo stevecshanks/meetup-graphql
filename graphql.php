@@ -9,6 +9,7 @@ use MeetupQL\Database\MongoDbMeetupRepository;
 use MeetupQL\Database\MongoDbPersonRepository;
 use MeetupQL\GraphQL\FieldResolver;
 use MeetupQL\GraphQL\MeetupResolver;
+use MeetupQL\GraphQL\QueryResolver;
 use MeetupQL\GraphQL\ResolverRegistry;
 use MongoDB\Client;
 
@@ -23,23 +24,15 @@ $mongoDbClient = new Client('mongodb://mongodb');
 $meetupRepository = new MongoDbMeetupRepository($mongoDbClient);
 $personRepository = new MongoDbPersonRepository($mongoDbClient);
 
-$rootValue = [
-    'meetups' => function () use ($meetupRepository) {
-        return $meetupRepository->findAll();
-    },
-    'people' => function () use ($personRepository) {
-        return $personRepository->findAll();
-    }
-];
-
 $resolverRegistry = new ResolverRegistry();
+$resolverRegistry->add('Query', new QueryResolver($resolverRegistry, $meetupRepository, $personRepository));
 $resolverRegistry->add('Meetup', new MeetupResolver($resolverRegistry, $personRepository));
 
 try {
     $result = GraphQL::executeQuery(
         $schema,
         $query,
-        $rootValue,
+        null,
         null,
         null,
         null,
