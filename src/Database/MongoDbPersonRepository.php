@@ -2,7 +2,6 @@
 
 namespace MeetupQL\Database;
 
-use MeetupQL\Domain\Meetup;
 use MeetupQL\Domain\Person;
 use MeetupQL\Domain\PersonRepository;
 use MongoDB\Client;
@@ -56,6 +55,7 @@ class MongoDbPersonRepository implements PersonRepository
             'id' => $person->getId(),
             'name' => $person->getName(),
             'companyName' => $person->getCompanyName(),
+            'interests' => $person->getInterests(),
         ];
     }
 
@@ -64,7 +64,8 @@ class MongoDbPersonRepository implements PersonRepository
         return new Person(
             $document['id'],
             $document['name'],
-            $document['companyName']
+            $document['companyName'],
+            $document['interests']->getArrayCopy()
         );
     }
 }

@@ -34,7 +34,8 @@ class DataGenerator
         return new Person(
             $this->randomIdFor('Person'),
             $this->faker->name,
-            random_int(0, 1) ? $this->faker->company : null
+            random_int(0, 1) ? $this->faker->company : null,
+            $this->collectionOf(random_int(0, 5), [$this, 'randomTopic'])
         );
     }
 
@@ -46,7 +47,7 @@ class DataGenerator
     {
         return new Meetup(
             $this->randomIdFor('Meetup'),
-            ucwords($this->faker->catchPhrase),
+            $this->randomTopic(),
             $this->randomAddress(),
             $this->faker->dateTimeThisYear->format('Y-m-d\TH:30:00O'),
             $this->randomPersonFrom($people)->getId(),
@@ -60,6 +61,11 @@ class DataGenerator
     private function randomIdFor(string $type): string
     {
         return IdService::encode($type, $this->faker->unique()->randomNumber());
+    }
+
+    private function randomTopic(): string
+    {
+        return ucwords($this->faker->catchPhrase);
     }
 
     private function randomAddress(): Address

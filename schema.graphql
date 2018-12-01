@@ -28,4 +28,5 @@ type Person {
   id: ID!
   name: String!
   companyName: String
+  interests: [String]!
 }
