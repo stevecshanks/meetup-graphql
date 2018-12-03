@@ -7,15 +7,13 @@ use GraphQL\GraphQL;
 use GraphQL\Error\Debug;
 use MeetupQL\Database\MongoDbMeetupRepository;
 use MeetupQL\Database\MongoDbPersonRepository;
+use MeetupQL\GraphQL\Api;
 use MeetupQL\GraphQL\DefaultResolver;
 use MeetupQL\GraphQL\MeetupResolver;
 use MeetupQL\GraphQL\PersonResolver;
 use MeetupQL\GraphQL\QueryResolver;
 use MeetupQL\GraphQL\ResolverRegistry;
 use MongoDB\Client;
-
-$contents = file_get_contents(__DIR__ . '/schema.graphql');
-$schema = BuildSchema::build($contents);
 
 $rawInput = file_get_contents('php://input');
 $input = json_decode($rawInput, true);
@@ -25,22 +23,10 @@ $mongoDbClient = new Client('mongodb://mongodb');
 $meetupRepository = new MongoDbMeetupRepository($mongoDbClient);
 $personRepository = new MongoDbPersonRepository($mongoDbClient);
 
-$resolverRegistry = new ResolverRegistry();
-$resolverRegistry->add('Query', new QueryResolver($resolverRegistry, $meetupRepository, $personRepository));
-$resolverRegistry->add('Meetup', new MeetupResolver($resolverRegistry, $personRepository));
-$resolverRegistry->add('Person', new PersonResolver($resolverRegistry, $meetupRepository));
+$api = new Api($meetupRepository, $personRepository);
 
 try {
-    $result = GraphQL::executeQuery(
-        $schema,
-        $query,
-        null,
-        null,
-        null,
-        null,
-        new DefaultResolver($resolverRegistry)
-    );
-    $output = $result->toArray(Debug::INCLUDE_DEBUG_MESSAGE | Debug::INCLUDE_TRACE);
+    $output = $api->query($query);
 } catch (Exception $e) {
     $output = [
         'errors' => [
