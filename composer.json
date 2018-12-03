@@ -6,9 +6,17 @@
         "twig/twig": "^2.0",
         "mongodb/mongodb": "^1.4"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^7.4"
+    },
     "autoload": {
         "psr-4": {
             "MeetupQL\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MeetupQL\\Tests\\": "tests/"
         }
     }
 }
