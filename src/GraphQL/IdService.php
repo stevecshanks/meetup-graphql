@@ -4,8 +4,8 @@ namespace MeetupQL\GraphQL;
 
 class IdService
 {
-    public static function encode(string $type, int $numericId): string
+    public static function encode(string $type, $id): string
     {
-        return base64_encode("{$type}:{$numericId}");
+        return base64_encode("{$type}:{$id}");
     }
 }
