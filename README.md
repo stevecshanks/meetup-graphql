@@ -1,5 +1,7 @@
 # meetup-graphql
 
+[![Build Status](https://scrutinizer-ci.com/g/stevecshanks/meetup-graphql/badges/build.png?b=master)](https://scrutinizer-ci.com/g/stevecshanks/meetup-graphql/build-status/master)
+
 Learning GraphQL by creating an API for a Meetup.com clone.
 
 ## Usage
@@ -11,10 +13,16 @@ docker-compose up -d
 docker-compose exec graphql php seed.php
 ```
 
-## Frontend
+### Frontend
 
 http://localhost:8081/
 
-## GraphQL
+### GraphQL
 
 http://localhost:8080/
+
+## Tests
+
+```shell
+./vendor/bin/phpunit
+```
