@@ -20,7 +20,7 @@ class MeetupQueryTest extends GraphQLTestCase
             }
 GRAPHQL;
 
-        $result = $this->api->query($query);
+        $result = $this->query($query);
 
         $this->assertCount(1, $result['data']['meetups']);
         $this->assertSame($meetup->getId(), $result['data']['meetups'][0]['id']);
@@ -46,7 +46,7 @@ GRAPHQL;
             }
 GRAPHQL;
 
-        $result = $this->api->query($query);
+        $result = $this->query($query);
 
         $this->assertCount(1, $result['data']['meetups']);
         $this->assertSame($person->getId(), $result['data']['meetups'][0]['organiser']['id']);
@@ -72,7 +72,7 @@ GRAPHQL;
             }
 GRAPHQL;
 
-        $result = $this->api->query($query);
+        $result = $this->query($query);
 
         $this->assertCount(1, $result['data']['meetups']);
         $this->assertSame($person->getId(), $result['data']['meetups'][0]['presenter']['id']);
@@ -98,7 +98,7 @@ GRAPHQL;
             }
 GRAPHQL;
 
-        $result = $this->api->query($query);
+        $result = $this->query($query);
 
         $this->assertCount(1, $result['data']['meetups']);
         $this->assertSame($person->getId(), $result['data']['meetups'][0]['attendees'][0]['id']);

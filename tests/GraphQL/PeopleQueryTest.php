@@ -20,7 +20,7 @@ class PeopleQueryTest extends GraphQLTestCase
             }
 GRAPHQL;
 
-        $result = $this->api->query($query);
+        $result = $this->query($query);
 
         $this->assertCount(1, $result['data']['people']);
         $this->assertSame($person->getId(), $result['data']['people'][0]['id']);
@@ -46,7 +46,7 @@ GRAPHQL;
             }
 GRAPHQL;
 
-        $result = $this->api->query($query);
+        $result = $this->query($query);
 
         $this->assertCount(1, $result['data']['people']);
         $this->assertSame($meetup->getId(), $result['data']['people'][0]['meetupsAttending'][0]['id']);

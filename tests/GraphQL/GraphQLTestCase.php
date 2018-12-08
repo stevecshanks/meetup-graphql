@@ -30,6 +30,17 @@ abstract class GraphQLTestCase extends TestCase
         $this->api = new Api($this->meetupRepository, $this->personRepository);
     }
 
+    protected function query(string $query)
+    {
+        $result = $this->api->query($query);
+
+        if (isset($result['errors']) && !empty($result['errors'])) {
+            $this->fail($result['errors'][0]['message']);
+        }
+
+        return $result;
+    }
+
     protected function meetup(): MeetupBuilder
     {
         return new MeetupBuilder();
