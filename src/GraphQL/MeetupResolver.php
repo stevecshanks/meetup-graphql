@@ -33,11 +33,13 @@ class MeetupResolver extends DefaultResolver
 
     protected function resolveAttendees(Meetup $meetup)
     {
-        return array_map(
-            function (string $id) {
-                return $this->personRepository->findById($id);
-            },
-            $meetup->getAttendeeIds()
+        return $this->connectionTo(
+            array_map(
+                function (string $id) {
+                    return $this->personRepository->findById($id);
+                },
+                $meetup->getAttendeeIds()
+            )
         );
     }
 }

@@ -3,13 +3,21 @@ schema {
 }
 
 type Query {
-  meetups: [Meetup],
-  people: [Person],
+  meetups: MeetupConnection,
+  people: PersonConnection,
   node(id: ID!): Node
 }
 
 interface Node {
   id: ID!
+}
+
+type MeetupConnection {
+  edges: [MeetupEdge]
+}
+
+type MeetupEdge {
+  node: Meetup
 }
 
 type Meetup implements Node {
@@ -19,7 +27,7 @@ type Meetup implements Node {
   start: String!
   organiser: Person!
   presenter: Person!
-  attendees: [Person]!
+  attendees: PersonConnection!
 }
 
 type Address {
@@ -29,10 +37,18 @@ type Address {
   postcode: String!
 }
 
+type PersonConnection {
+  edges: [PersonEdge]
+}
+
+type PersonEdge {
+  node: Person
+}
+
 type Person implements Node {
   id: ID!
   name: String!
   companyName: String
   interests: [String]!
-  meetupsAttending: [Meetup]!
+  meetupsAttending: MeetupConnection!
 }

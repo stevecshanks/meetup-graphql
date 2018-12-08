@@ -43,11 +43,11 @@ class QueryResolver extends DefaultResolver
 
     protected function resolveMeetups()
     {
-        return $this->meetupRepository->findAll();
+        return $this->connectionTo($this->meetupRepository->findAll());
     }
 
     protected function resolvePeople()
     {
-        return $this->personRepository->findAll();
+        return $this->connectionTo($this->personRepository->findAll());
     }
 }

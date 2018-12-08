@@ -23,6 +23,6 @@ class PersonResolver extends DefaultResolver
 
     protected function resolveMeetupsAttending(Person $person)
     {
-        return $this->meetupRepository->findByAttendee($person);
+        return $this->connectionTo($this->meetupRepository->findByAttendee($person));
     }
 }

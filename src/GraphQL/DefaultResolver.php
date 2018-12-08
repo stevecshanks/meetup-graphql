@@ -59,4 +59,16 @@ class DefaultResolver implements Resolver
 
         return Executor::defaultFieldResolver($source, $args, $context, $info);
     }
+
+    protected function connectionTo(array $edges)
+    {
+        return [
+            'edges' => array_map(
+                function ($edge) {
+                    return ['node' => $edge];
+                },
+                $edges
+            )
+        ];
+    }
 }

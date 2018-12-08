@@ -14,17 +14,22 @@ class MeetupQueryTest extends GraphQLTestCase
         $query = <<<GRAPHQL
             query {
               meetups {
-                id
-                name
+                edges {
+                  node {
+                    id
+                    name
+                  }
+                }
               }
             }
 GRAPHQL;
 
         $result = $this->query($query);
 
-        $this->assertCount(1, $result['data']['meetups']);
-        $this->assertSame($meetup->getId(), $result['data']['meetups'][0]['id']);
-        $this->assertSame($meetup->getName(), $result['data']['meetups'][0]['name']);
+        $this->assertCount(1, $result['data']['meetups']['edges']);
+        $meetupNode = $result['data']['meetups']['edges'][0]['node'];
+        $this->assertSame($meetup->getId(), $meetupNode['id']);
+        $this->assertSame($meetup->getName(), $meetupNode['name']);
     }
 
     public function testOrganiserCanBeRetrieved()
@@ -38,9 +43,13 @@ GRAPHQL;
         $query = <<<GRAPHQL
             query {
               meetups {
-                organiser {
-                  id
-                  name
+                edges {
+                  node {
+                    organiser {
+                      id
+                      name
+                    }
+                  }
                 }
               }
             }
@@ -48,9 +57,10 @@ GRAPHQL;
 
         $result = $this->query($query);
 
-        $this->assertCount(1, $result['data']['meetups']);
-        $this->assertSame($person->getId(), $result['data']['meetups'][0]['organiser']['id']);
-        $this->assertSame($person->getName(), $result['data']['meetups'][0]['organiser']['name']);
+        $this->assertCount(1, $result['data']['meetups']['edges']);
+        $meetupNode = $result['data']['meetups']['edges'][0]['node'];
+        $this->assertSame($person->getId(), $meetupNode['organiser']['id']);
+        $this->assertSame($person->getName(), $meetupNode['organiser']['name']);
     }
 
     public function testPresenterCanBeRetrieved()
@@ -64,9 +74,13 @@ GRAPHQL;
         $query = <<<GRAPHQL
             query {
               meetups {
-                presenter {
-                  id
-                  name
+                edges {
+                  node {
+                    presenter {
+                      id
+                      name
+                    }
+                  }
                 }
               }
             }
@@ -74,9 +88,10 @@ GRAPHQL;
 
         $result = $this->query($query);
 
-        $this->assertCount(1, $result['data']['meetups']);
-        $this->assertSame($person->getId(), $result['data']['meetups'][0]['presenter']['id']);
-        $this->assertSame($person->getName(), $result['data']['meetups'][0]['presenter']['name']);
+        $this->assertCount(1, $result['data']['meetups']['edges']);
+        $meetupNode = $result['data']['meetups']['edges'][0]['node'];
+        $this->assertSame($person->getId(), $meetupNode['presenter']['id']);
+        $this->assertSame($person->getName(), $meetupNode['presenter']['name']);
     }
 
     public function testAttendeeCanBeRetrieved()
@@ -90,9 +105,17 @@ GRAPHQL;
         $query = <<<GRAPHQL
             query {
               meetups {
-                attendees {
-                  id
-                  name
+                edges {
+                  node {
+                    attendees {
+                      edges {
+                        node {
+                          id
+                          name
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -100,8 +123,9 @@ GRAPHQL;
 
         $result = $this->query($query);
 
-        $this->assertCount(1, $result['data']['meetups']);
-        $this->assertSame($person->getId(), $result['data']['meetups'][0]['attendees'][0]['id']);
-        $this->assertSame($person->getName(), $result['data']['meetups'][0]['attendees'][0]['name']);
+        $this->assertCount(1, $result['data']['meetups']['edges']);
+        $meetupNode = $result['data']['meetups']['edges'][0]['node'];
+        $this->assertSame($person->getId(), $meetupNode['attendees']['edges'][0]['node']['id']);
+        $this->assertSame($person->getName(), $meetupNode['attendees']['edges'][0]['node']['name']);
     }
 }
