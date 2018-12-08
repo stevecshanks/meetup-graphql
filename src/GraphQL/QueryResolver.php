@@ -29,6 +29,18 @@ class QueryResolver extends DefaultResolver
         $this->personRepository = $personRepository;
     }
 
+    protected function resolveNode($source, $args)
+    {
+        switch (GlobalId::typeOf($args['id'])) {
+            case 'Meetup':
+                return $this->meetupRepository->findById($args['id']);
+            case 'Person':
+                return $this->personRepository->findById($args['id']);
+            default:
+                return null;
+        }
+    }
+
     protected function resolveMeetups()
     {
         return $this->meetupRepository->findAll();

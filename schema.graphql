@@ -4,10 +4,15 @@ schema {
 
 type Query {
   meetups: [Meetup],
-  people: [Person]
+  people: [Person],
+  node(id: ID!): Node
 }
 
-type Meetup {
+interface Node {
+  id: ID!
+}
+
+type Meetup implements Node {
   id: ID!
   name: String!
   location: Address!
@@ -24,7 +29,7 @@ type Address {
   postcode: String!
 }
 
-type Person {
+type Person implements Node {
   id: ID!
   name: String!
   companyName: String

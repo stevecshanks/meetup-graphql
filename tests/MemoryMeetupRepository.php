@@ -38,4 +38,15 @@ class MemoryMeetupRepository implements MeetupRepository
             }
         );
     }
+
+    public function findById(string $id): Meetup
+    {
+        foreach ($this->meetups as $meetup) {
+            if ($meetup->getId() === $id) {
+                return $meetup;
+            }
+        }
+
+        throw new \InvalidArgumentException("No meetup found with ID {$id}");
+    }
 }

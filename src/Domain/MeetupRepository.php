@@ -16,4 +16,6 @@ interface MeetupRepository
      * @return Meetup[]
      */
     public function findByAttendee(Person $person): array;
+
+    public function findById(string $id): Meetup;
 }

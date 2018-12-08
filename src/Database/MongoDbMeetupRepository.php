@@ -49,6 +49,16 @@ class MongoDbMeetupRepository implements MeetupRepository
         return array_map([$this, 'documentToMeetup'], iterator_to_array($documentIterator));
     }
 
+    public function findById(string $id): Meetup
+    {
+        $document = $this->collection->findOne(['id' => $id]);
+        if (!$document) {
+            throw new \InvalidArgumentException("Meetup with ID {$id} not found");
+        }
+
+        return $this->documentToMeetup($document);
+    }
+
     protected function meetupToArray(Meetup $meetup): array
     {
         return [

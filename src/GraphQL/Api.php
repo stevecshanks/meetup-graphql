@@ -4,6 +4,7 @@ namespace MeetupQL\GraphQL;
 
 use GraphQL\Error\Debug;
 use GraphQL\GraphQL;
+use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Schema;
 use GraphQL\Utils\BuildSchema;
 use MeetupQL\Domain\MeetupRepository;
@@ -55,7 +56,17 @@ class Api
     private function buildSchema()
     {
         $schemaFile = file_get_contents(__DIR__ . '/../../schema.graphql');
-        $this->schema = BuildSchema::build($schemaFile);
+
+        $typeConfigDecorator = function ($typeConfig) {
+            if ($typeConfig['name'] === 'Node') {
+                $typeConfig['resolveType'] = function ($value) {
+                    return GlobalId::typeOf($value->getId());
+                };
+            }
+            return $typeConfig;
+        };
+
+        $this->schema = BuildSchema::build($schemaFile, $typeConfigDecorator);
     }
 
     private function registerResolvers()

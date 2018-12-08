@@ -11,8 +11,5 @@ interface PersonRepository
 
     public function add(Person $person): void;
 
-    /**
-     * @return Person
-     */
     public function findById(string $id): Person;
 }
