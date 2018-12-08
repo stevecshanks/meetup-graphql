@@ -12,19 +12,27 @@ $client = new Client();
 $query = <<<GRAPHQL
 query {
   meetups {
-    name
-    start
-    location {
-      companyName
-      address
-      city
-      postcode
-    }
-    organiser {
-      name
-    }
-    attendees {
-      id
+    edges {
+      node {
+        name
+        start
+        location {
+          companyName
+          address
+          city
+          postcode
+        }
+        organiser {
+          name
+        }
+        attendees {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+      }
     }
   }
 }

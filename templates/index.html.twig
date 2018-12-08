@@ -30,13 +30,13 @@
 
     <div class="container">
         <div class="row">
-            {% for meetup in meetups %}
+            {% for meetup in meetups.edges %}
             <div class="col-md-4">
-                <h2>{{ meetup.name }}</h2>
-                <h3>{{ meetup.start | date('D jS F Y H:i') }}</h3>
-                <p><strong>{{ meetup.location.companyName }}</strong>, {{ [meetup.location.address, meetup.location.city, meetup.location.postcode] | join(', ') }}</p>
-                <p>Organised by {{ meetup.organiser.name }}</p>
-                <p><a class="btn btn-secondary" href="#" role="button">Join {{ meetup.attendees | length }} other attendee(s) &raquo;</a></p>
+                <h2>{{ meetup.node.name }}</h2>
+                <h3>{{ meetup.node.start | date('D jS F Y H:i') }}</h3>
+                <p><strong>{{ meetup.node.location.companyName }}</strong>, {{ [meetup.node.location.address, meetup.node.location.city, meetup.node.location.postcode] | join(', ') }}</p>
+                <p>Organised by {{ meetup.node.organiser.name }}</p>
+                <p><a class="btn btn-secondary" href="#" role="button">Join {{ meetup.node.attendees.edges | length }} other attendee(s) &raquo;</a></p>
             </div>
             {% endfor %}
         </div>
