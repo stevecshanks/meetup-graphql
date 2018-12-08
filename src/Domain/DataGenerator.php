@@ -5,7 +5,7 @@ namespace MeetupQL\Domain;
 use Faker\Factory;
 use Faker\Generator;
 use Faker\Provider\en_GB\Address as FakerAddress;
-use MeetupQL\GraphQL\IdService;
+use MeetupQL\GraphQL\GlobalId;
 
 class DataGenerator
 {
@@ -60,7 +60,7 @@ class DataGenerator
 
     private function randomIdFor(string $type): string
     {
-        return IdService::encode($type, $this->faker->unique()->randomNumber());
+        return GlobalId::encode($type, $this->faker->unique()->randomNumber());
     }
 
     private function randomTopic(): string

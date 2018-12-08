@@ -5,7 +5,7 @@ namespace MeetupQL\Tests;
 use MeetupQL\Domain\Address;
 use MeetupQL\Domain\Meetup;
 use MeetupQL\Domain\Person;
-use MeetupQL\GraphQL\IdService;
+use MeetupQL\GraphQL\GlobalId;
 
 class MeetupBuilder
 {
@@ -74,6 +74,6 @@ class MeetupBuilder
 
     private function randomId()
     {
-        return IdService::encode('Meetup', uniqid('', true));
+        return GlobalId::encode('Meetup', uniqid('', true));
     }
 }

@@ -3,7 +3,7 @@
 namespace MeetupQL\Tests;
 
 use MeetupQL\Domain\Person;
-use MeetupQL\GraphQL\IdService;
+use MeetupQL\GraphQL\GlobalId;
 
 class PersonBuilder
 {
@@ -19,6 +19,6 @@ class PersonBuilder
 
     private function randomId()
     {
-        return IdService::encode('Person', uniqid('', true));
+        return GlobalId::encode('Person', uniqid('', true));
     }
 }
