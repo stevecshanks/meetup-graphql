@@ -15,6 +15,9 @@ use MeetupQL\GraphQL\QueryResolver;
 use MeetupQL\GraphQL\ResolverRegistry;
 use MongoDB\Client;
 
+ini_set('display_errors', false);
+ini_set('log_errors', true);
+
 $rawInput = file_get_contents('php://input');
 $input = json_decode($rawInput, true);
 $query = $input['query'];

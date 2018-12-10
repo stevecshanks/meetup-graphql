@@ -28,6 +28,7 @@ abstract class GraphQLTestCase extends TestCase
         $this->personRepository = new MemoryPersonRepository();
 
         $this->api = new Api($this->meetupRepository, $this->personRepository);
+        $this->api->enableDebug();
     }
 
     protected function query(string $query)

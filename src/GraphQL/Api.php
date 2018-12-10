@@ -24,6 +24,9 @@ class Api
     /** @var DefaultResolver */
     private $defaultResolver;
 
+    /** @var bool */
+    private $debugMode = false;
+
     /**
      * Api constructor.
      * @param MeetupRepository $meetupRepository
@@ -39,6 +42,11 @@ class Api
         $this->registerResolvers();
     }
 
+    public function enableDebug()
+    {
+        $this->debugMode = true;
+    }
+
     public function query(string $query): array
     {
         $result = GraphQL::executeQuery(
@@ -50,7 +58,16 @@ class Api
             null,
             $this->defaultResolver
         );
-        return $result->toArray(Debug::INCLUDE_DEBUG_MESSAGE | Debug::INCLUDE_TRACE);
+        return $result->toArray($this->debugOptions());
+    }
+
+    private function debugOptions()
+    {
+        if (!$this->debugMode) {
+            return null;
+        }
+
+        return Debug::INCLUDE_DEBUG_MESSAGE | Debug::RETHROW_INTERNAL_EXCEPTIONS;
     }
 
     private function buildSchema()
