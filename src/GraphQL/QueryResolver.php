@@ -41,9 +41,9 @@ class QueryResolver extends DefaultResolver
         }
     }
 
-    protected function resolveMeetups()
+    protected function resolveMeetups($source, $args)
     {
-        return $this->connectionTo($this->meetupRepository->findAll());
+        return $this->connectionTo($this->meetupRepository->findAll(), $args);
     }
 
     protected function resolvePeople()

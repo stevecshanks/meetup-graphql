@@ -4,6 +4,7 @@ namespace MeetupQL\GraphQL;
 
 use GraphQL\Executor\Executor;
 use GraphQL\Type\Definition\ResolveInfo;
+use GraphQLRelay\Relay;
 
 class DefaultResolver implements Resolver
 {
@@ -60,15 +61,8 @@ class DefaultResolver implements Resolver
         return Executor::defaultFieldResolver($source, $args, $context, $info);
     }
 
-    protected function connectionTo(array $edges)
+    protected function connectionTo(array $edges, $args = [])
     {
-        return [
-            'edges' => array_map(
-                function ($edge) {
-                    return ['node' => $edge];
-                },
-                $edges
-            )
-        ];
+        return Relay::connectionFromArray($edges, $args);
     }
 }

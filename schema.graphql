@@ -3,8 +3,8 @@ schema {
 }
 
 type Query {
-  meetups: MeetupConnection,
-  people: PersonConnection,
+  meetups(first: Int, after: String): MeetupConnection
+  people: PersonConnection
   node(id: ID!): Node
 }
 
@@ -12,11 +12,17 @@ interface Node {
   id: ID!
 }
 
+type PageInfo {
+  hasNextPage: Boolean!
+}
+
 type MeetupConnection {
   edges: [MeetupEdge]
+  pageInfo: PageInfo!
 }
 
 type MeetupEdge {
+  cursor: String!
   node: Meetup
 }
 
