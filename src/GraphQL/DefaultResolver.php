@@ -61,7 +61,7 @@ class DefaultResolver implements Resolver
         return Executor::defaultFieldResolver($source, $args, $context, $info);
     }
 
-    protected function connectionTo(array $edges, $args = [])
+    protected function connectionTo(array $edges, array $args)
     {
         return Relay::connectionFromArray($edges, $args);
     }

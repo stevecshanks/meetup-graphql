@@ -4,7 +4,7 @@ schema {
 
 type Query {
   meetups(first: Int, after: String): MeetupConnection
-  people: PersonConnection
+  people(first: Int, after: String): PersonConnection
   node(id: ID!): Node
 }
 
@@ -12,18 +12,28 @@ interface Node {
   id: ID!
 }
 
+interface Edge {
+  cursor: String!
+  node: Node!
+}
+
+interface Connection {
+  edges: [Edge]!
+  pageInfo: PageInfo!
+}
+
 type PageInfo {
   hasNextPage: Boolean!
 }
 
-type MeetupConnection {
-  edges: [MeetupEdge]
+type MeetupConnection implements Connection {
+  edges: [MeetupEdge]!
   pageInfo: PageInfo!
 }
 
-type MeetupEdge {
+type MeetupEdge implements Edge {
   cursor: String!
-  node: Meetup
+  node: Meetup!
 }
 
 type Meetup implements Node {
@@ -43,12 +53,14 @@ type Address {
   postcode: String!
 }
 
-type PersonConnection {
-  edges: [PersonEdge]
+type PersonConnection implements Connection {
+  edges: [PersonEdge]!
+  pageInfo: PageInfo!
 }
 
-type PersonEdge {
-  node: Person
+type PersonEdge implements Edge {
+  cursor: String!
+  node: Person!
 }
 
 type Person implements Node {

@@ -41,13 +41,13 @@ class QueryResolver extends DefaultResolver
         }
     }
 
-    protected function resolveMeetups($source, $args)
+    protected function resolveMeetups($source, array $args)
     {
         return $this->connectionTo($this->meetupRepository->findAll(), $args);
     }
 
-    protected function resolvePeople()
+    protected function resolvePeople($source, array $args)
     {
-        return $this->connectionTo($this->personRepository->findAll());
+        return $this->connectionTo($this->personRepository->findAll(), $args);
     }
 }

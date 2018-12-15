@@ -31,7 +31,7 @@ class MeetupResolver extends DefaultResolver
         return $this->personRepository->findById($meetup->getPresenterId());
     }
 
-    protected function resolveAttendees(Meetup $meetup)
+    protected function resolveAttendees(Meetup $meetup, array $args)
     {
         return $this->connectionTo(
             array_map(
@@ -39,7 +39,8 @@ class MeetupResolver extends DefaultResolver
                     return $this->personRepository->findById($id);
                 },
                 $meetup->getAttendeeIds()
-            )
+            ),
+            $args
         );
     }
 }

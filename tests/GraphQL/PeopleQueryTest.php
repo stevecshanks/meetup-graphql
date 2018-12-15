@@ -66,4 +66,57 @@ GRAPHQL;
         $this->assertSame($meetup->getId(), $personNode['meetupsAttending']['edges'][0]['node']['id']);
         $this->assertSame($meetup->getName(), $personNode['meetupsAttending']['edges'][0]['node']['name']);
     }
+
+    public function testPeopleCanBePaginated()
+    {
+        $person1 = $this->person()->build();
+        $person2 = $this->person()->build();
+        $this->personRepository->add($person1);
+        $this->personRepository->add($person2);
+
+        $firstQuery = <<<GRAPHQL
+            query {
+              people (first: 1) {
+                pageInfo {
+                  hasNextPage
+                }
+                edges {
+                  cursor
+                  node {
+                    id
+                  }
+                }
+              }
+            }
+GRAPHQL;
+
+        $result = $this->query($firstQuery);
+
+        $this->assertCount(1, $result['data']['people']['edges']);
+        $this->assertTrue($result['data']['people']['pageInfo']['hasNextPage']);
+        $this->assertSame($person1->getId(), $result['data']['people']['edges'][0]['node']['id']);
+
+        $cursor = $result['data']['people']['edges'][0]['cursor'];
+
+        $secondQuery = <<<GRAPHQL
+            query {
+              people (first: 1, after: "{$cursor}") {
+                pageInfo {
+                  hasNextPage
+                }
+                edges {
+                  node {
+                    id
+                  }
+                }
+              }
+            }
+GRAPHQL;
+
+        $result = $this->query($secondQuery);
+
+        $this->assertCount(1, $result['data']['people']['edges']);
+        $this->assertFalse($result['data']['people']['pageInfo']['hasNextPage']);
+        $this->assertSame($person2->getId(), $result['data']['people']['edges'][0]['node']['id']);
+    }
 }
