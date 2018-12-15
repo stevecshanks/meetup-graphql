@@ -119,4 +119,30 @@ GRAPHQL;
         $this->assertFalse($result['data']['people']['pageInfo']['hasNextPage']);
         $this->assertSame($person2->getId(), $result['data']['people']['edges'][0]['node']['id']);
     }
+
+    public function testPeopleCanBeFoundByInterest()
+    {
+        $personInterestedInJava = $this->person()->interestedIn('Java')->build();
+        $personInterestedInPHP = $this->person()->interestedIn('PHP')->build();
+        $this->personRepository->add($personInterestedInJava);
+        $this->personRepository->add($personInterestedInPHP);
+
+        $query = <<<GRAPHQL
+            query {
+              people (interestedIn: "PHP") {
+                edges {
+                  node {
+                    id
+                  }
+                }
+              }
+            }
+GRAPHQL;
+
+        $result = $this->query($query);
+
+        $this->assertCount(1, $result['data']['people']['edges']);
+        $personNode = $result['data']['people']['edges'][0]['node'];
+        $this->assertSame($personInterestedInPHP->getId(), $personNode['id']);
+    }
 }

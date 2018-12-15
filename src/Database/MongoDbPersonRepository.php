@@ -49,6 +49,14 @@ class MongoDbPersonRepository implements PersonRepository
         return $this->documentToPerson($document);
     }
 
+    public function findByInterest(string $interest): array
+    {
+        $documentIterator = $this->collection->find([
+            'interests' => $interest
+        ]);
+        return array_map([$this, 'documentToPerson'], iterator_to_array($documentIterator));
+    }
+
     protected function personToArray(Person $person)
     {
         return [

@@ -21,4 +21,11 @@ class MemoryPersonRepository extends Collection implements PersonRepository
     {
         return $this->itemWithId($id);
     }
+
+    public function findByInterest(string $interest): array
+    {
+        return $this->filterCollection(function (Person $person) use ($interest) {
+            return in_array($interest, $person->getInterests());
+        });
+    }
 }

@@ -4,7 +4,7 @@ schema {
 
 type Query {
   meetups(first: Int, after: String): MeetupConnection
-  people(first: Int, after: String): PersonConnection
+  people(first: Int, after: String, interestedIn: String): PersonConnection
   node(id: ID!): Node
 }
 

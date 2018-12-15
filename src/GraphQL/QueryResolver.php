@@ -48,6 +48,9 @@ class QueryResolver extends DefaultResolver
 
     protected function resolvePeople($source, array $args)
     {
+        if (isset($args['interestedIn'])) {
+            return $this->connectionTo($this->personRepository->findByInterest($args['interestedIn']), $args);
+        }
         return $this->connectionTo($this->personRepository->findAll(), $args);
     }
 }
