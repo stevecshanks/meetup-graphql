@@ -108,4 +108,9 @@ class Meetup
     {
         return $this->attendeeIds;
     }
+
+    public function registerAttendee(Person $attendee)
+    {
+        $this->attendeeIds[] = $attendee->getId();
+    }
 }

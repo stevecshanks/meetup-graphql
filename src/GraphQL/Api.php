@@ -47,7 +47,7 @@ class Api
         $this->debugMode = true;
     }
 
-    public function query(string $query): array
+    public function execute(string $query): array
     {
         $result = GraphQL::executeQuery(
             $this->schema,
@@ -92,6 +92,10 @@ class Api
         $resolverRegistry->add(
             'Query',
             new QueryResolver($resolverRegistry, $this->meetupRepository, $this->personRepository)
+        );
+        $resolverRegistry->add(
+            'Mutation',
+            new MutationResolver($resolverRegistry, $this->meetupRepository, $this->personRepository)
         );
         $resolverRegistry->add(
             'Meetup',

@@ -33,7 +33,7 @@ abstract class GraphQLTestCase extends TestCase
 
     protected function query(string $query)
     {
-        $result = $this->api->query($query);
+        $result = $this->api->execute($query);
 
         if (isset($result['errors']) && !empty($result['errors'])) {
             $this->fail($result['errors'][0]['message']);

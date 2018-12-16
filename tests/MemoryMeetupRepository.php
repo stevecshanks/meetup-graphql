@@ -18,6 +18,11 @@ class MemoryMeetupRepository extends Collection implements MeetupRepository
         $this->addToCollection($meetup);
     }
 
+    public function update(Meetup $meetup): void
+    {
+        $this->updateInCollection($meetup);
+    }
+
     public function findByAttendee(Person $person): array
     {
         return $this->filterCollection(

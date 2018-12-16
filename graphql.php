@@ -29,7 +29,7 @@ $personRepository = new MongoDbPersonRepository($mongoDbClient);
 $api = new Api($meetupRepository, $personRepository);
 
 try {
-    $output = $api->query($query);
+    $output = $api->execute($query);
 } catch (Exception $e) {
     $output = [
         'errors' => [

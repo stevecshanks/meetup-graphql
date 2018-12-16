@@ -1,11 +1,16 @@
 schema {
   query: Query
+  mutation: Mutation
 }
 
 type Query {
   meetups(first: Int, after: String): MeetupConnection
   people(first: Int, after: String, interestedIn: String): PersonConnection
   node(id: ID!): Node
+}
+
+type Mutation {
+  attendMeetup(input: AttendMeetupInput): AttendMeetupPayload
 }
 
 interface Node {
@@ -69,4 +74,16 @@ type Person implements Node {
   companyName: String
   interests: [String]!
   meetupsAttending: MeetupConnection!
+}
+
+input AttendMeetupInput {
+  meetupId: ID!
+  attendeeId: ID!
+  clientMutationId: String
+}
+
+type AttendMeetupPayload {
+  meetup: Meetup
+  attendee: Person
+  clientMutationId: String
 }

@@ -11,6 +11,8 @@ interface MeetupRepository
 
     public function add(Meetup $meetup): void;
 
+    public function update(Meetup $meetup): void;
+
     /**
      * @param Person $person
      * @return Meetup[]

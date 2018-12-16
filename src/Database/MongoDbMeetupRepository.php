@@ -41,6 +41,11 @@ class MongoDbMeetupRepository implements MeetupRepository
         $this->collection->insertOne($this->meetupToArray($meetup));
     }
 
+    public function update(Meetup $meetup): void
+    {
+        $this->collection->updateOne(['id' => $meetup->getId()], ['$set' => $this->meetupToArray($meetup)]);
+    }
+
     public function findByAttendee(Person $person): array
     {
         $documentIterator = $this->collection->find([

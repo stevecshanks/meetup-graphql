@@ -20,6 +20,22 @@ abstract class Collection
         $this->collection[] = $object;
     }
 
+    protected function updateInCollection($updatedObject): void
+    {
+        $this->collection[$this->indexInCollection($updatedObject)] = $updatedObject;
+    }
+
+    private function indexInCollection($updatedObject): int
+    {
+        foreach ($this->collection as $index => $object) {
+            if ($object->getId() === $updatedObject->getId()) {
+                return $index;
+            }
+        }
+
+        throw new \InvalidArgumentException('Cannot find object in collection');
+    }
+
     protected function allItemsInCollection(): array
     {
         return $this->collection;
