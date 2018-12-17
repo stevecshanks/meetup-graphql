@@ -9,7 +9,7 @@ services:
       - "8080:8080"
     volumes:
       - .:/usr/src/app
-    command: bash -c "composer install && php -S 0.0.0.0:8080 graphql.php"
+    command: bash -c "composer install && php -S 0.0.0.0:8080 public/graphql.php"
   frontend:
     depends_on:
       - graphql
@@ -19,7 +19,7 @@ services:
       - "8081:8080"
     volumes:
       - .:/usr/src/app
-    command: php -S 0.0.0.0:8080 frontend.php
+    command: php -S 0.0.0.0:8080 public/frontend.php
   mongodb:
     image: mongo:4.0-xenial
     ports:

@@ -5,7 +5,7 @@ use MeetupQL\Database\MongoDbPersonRepository;
 use MeetupQL\Domain\DataGenerator;
 use MongoDB\Client;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $mongoDbClient = new Client('mongodb://mongodb');
 
