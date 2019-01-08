@@ -26,3 +26,11 @@ services:
       - 27017:27017
     volumes:
       - ./mongodb-data:/data
+  graphiql:
+    depends_on:
+      - graphql
+    image: npalm/graphiql
+    ports:
+      - "4000:4000"
+    environment:
+      - API_URL=http://localhost:8080

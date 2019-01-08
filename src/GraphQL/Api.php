@@ -47,7 +47,7 @@ class Api
         $this->debugMode = true;
     }
 
-    public function execute(string $query): array
+    public function execute(?string $query): array
     {
         $result = GraphQL::executeQuery(
             $this->schema,
