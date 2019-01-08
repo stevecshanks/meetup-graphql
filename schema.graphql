@@ -10,6 +10,7 @@ type Query {
 }
 
 type Mutation {
+  "Register an attendee for a meetup"
   attendMeetup(input: AttendMeetupInput): AttendMeetupPayload
 }
 
