@@ -34,3 +34,11 @@ services:
       - "4000:4000"
     environment:
       - API_URL=http://localhost:8080
+  voyager:
+    depends_on:
+      - graphql
+    image: atten/graphql-voyager
+    ports:
+      - "9090:9090"
+    environment:
+      - GRAPHQL_SCHEMA_URL=http://localhost:8080/graphql
