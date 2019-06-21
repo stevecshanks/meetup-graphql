@@ -18,7 +18,7 @@ class NodeQueryTest extends GraphQLTestCase
                 }
               }
             }
-GRAPHQL;
+        GRAPHQL;
 
         $result = $this->query($query);
 
@@ -40,7 +40,7 @@ GRAPHQL;
                 }
               }
             }
-GRAPHQL;
+        GRAPHQL;
 
         $result = $this->query($query);
 

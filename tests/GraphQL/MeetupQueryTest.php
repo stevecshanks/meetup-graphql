@@ -22,7 +22,7 @@ class MeetupQueryTest extends GraphQLTestCase
                 }
               }
             }
-GRAPHQL;
+        GRAPHQL;
 
         $result = $this->query($query);
 
@@ -53,7 +53,7 @@ GRAPHQL;
                 }
               }
             }
-GRAPHQL;
+        GRAPHQL;
 
         $result = $this->query($query);
 
@@ -84,7 +84,7 @@ GRAPHQL;
                 }
               }
             }
-GRAPHQL;
+        GRAPHQL;
 
         $result = $this->query($query);
 
@@ -119,7 +119,7 @@ GRAPHQL;
                 }
               }
             }
-GRAPHQL;
+        GRAPHQL;
 
         $result = $this->query($query);
 
@@ -150,7 +150,7 @@ GRAPHQL;
                 }
               }
             }
-GRAPHQL;
+        GRAPHQL;
 
         $result = $this->query($firstQuery);
 
@@ -173,7 +173,7 @@ GRAPHQL;
                 }
               }
             }
-GRAPHQL;
+        GRAPHQL;
 
         $result = $this->query($secondQuery);
 
