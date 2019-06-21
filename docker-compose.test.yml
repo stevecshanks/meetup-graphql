@@ -1,0 +1,7 @@
+version: "3"
+services:
+  unit:
+    image: app
+    volumes:
+      - .:/usr/src/app
+    command: vendor/bin/phpunit

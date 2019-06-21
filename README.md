@@ -7,10 +7,13 @@ Learning GraphQL by creating an API for a Meetup.com clone.
 ## Usage
 
 ```shell
-docker-compose up -d
+make run
+```
 
-# Create some test data
-docker-compose exec graphql php bin/seed.php
+In another terminal, create some test data:
+
+```shell
+make seed
 ```
 
 ### Frontend
@@ -24,5 +27,5 @@ http://localhost:8080/
 ## Tests
 
 ```shell
-./vendor/bin/phpunit
+make test
 ```
