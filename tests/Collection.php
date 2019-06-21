@@ -44,9 +44,7 @@ abstract class Collection
     protected function itemWithId($id)
     {
         $matches = $this->filterCollection(
-            function ($item) use ($id) {
-                return $item->getId() === $id;
-            }
+            fn($item) => $item->getId() === $id,
         );
 
         if (empty($matches)) {

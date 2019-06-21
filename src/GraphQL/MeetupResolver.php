@@ -34,9 +34,7 @@ class MeetupResolver extends DefaultResolver
     {
         return $this->connectionTo(
             array_map(
-                function (string $id) {
-                    return $this->personRepository->findById($id);
-                },
+                fn(string $id) => $this->personRepository->findById($id),
                 $meetup->getAttendeeIds()
             ),
             $args

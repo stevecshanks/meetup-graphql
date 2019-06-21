@@ -67,9 +67,7 @@ class Api
 
         $typeConfigDecorator = function ($typeConfig) {
             if ($typeConfig['name'] === 'Node') {
-                $typeConfig['resolveType'] = function ($value) {
-                    return GlobalId::typeOf($value->getId());
-                };
+                $typeConfig['resolveType'] = fn($value) => GlobalId::typeOf($value->getId());
             }
             return $typeConfig;
         };

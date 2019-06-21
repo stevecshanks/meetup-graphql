@@ -26,9 +26,7 @@ class MemoryMeetupRepository extends Collection implements MeetupRepository
     public function findByAttendee(Person $person): array
     {
         return $this->filterCollection(
-            function (Meetup $meetup) use ($person) {
-                return in_array($person->getId(), $meetup->getAttendeeIds());
-            }
+            fn(Meetup $meetup) => in_array($person->getId(), $meetup->getAttendeeIds())
         );
     }
 

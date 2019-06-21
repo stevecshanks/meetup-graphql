@@ -20,9 +20,7 @@ foreach ($generator->collectionOf(20, [$generator, 'randomPerson']) as $person) 
 
 $people = $personRepository->findAll();
 
-$randomMeetup = function () use ($generator, $people) {
-    return $generator->randomMeetup($people);
-};
+$randomMeetup = fn() => $generator->randomMeetup($people);
 
 foreach ($generator->collectionOf(20, $randomMeetup) as $meetup) {
     $meetupRepository->add($meetup);

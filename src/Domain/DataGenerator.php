@@ -51,9 +51,7 @@ class DataGenerator
             $this->faker->dateTimeThisYear->format('Y-m-d\TH:30:00O'),
             $this->randomPersonFrom($people)->getId(),
             $this->randomPersonFrom($people)->getId(),
-            $this->collectionOf(random_int(0, 5), function () use ($people) {
-                return $this->randomPersonFrom($people)->getId();
-            })
+            $this->collectionOf(random_int(0, 5), fn() => $this->randomPersonFrom($people)->getId())
         );
     }
 
