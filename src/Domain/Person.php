@@ -4,17 +4,12 @@ namespace MeetupQL\Domain;
 
 final class Person
 {
-    /** @var string */
-    private $id;
-
-    /** @var string */
-    private $name;
-
-    /** @var string|null */
-    private $companyName;
+    private string $id;
+    private string $name;
+    private ?string $companyName;
 
     /** @var string[] */
-    private $interests;
+    private array $interests;
 
     /**
      * Person constructor.

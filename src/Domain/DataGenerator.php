@@ -9,8 +9,7 @@ use MeetupQL\GraphQL\GlobalId;
 
 class DataGenerator
 {
-    /** @var Generator */
-    private $faker;
+    private Generator $faker;
 
     public function __construct()
     {

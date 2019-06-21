@@ -12,20 +12,11 @@ use MeetupQL\Domain\PersonRepository;
 
 class Api
 {
-    /** @var MeetupRepository */
-    private $meetupRepository;
-
-    /** @var PersonRepository */
-    private $personRepository;
-
-    /** @var Schema */
-    private $schema;
-
-    /** @var DefaultResolver */
-    private $defaultResolver;
-
-    /** @var bool */
-    private $debugMode = false;
+    private MeetupRepository $meetupRepository;
+    private PersonRepository $personRepository;
+    private Schema $schema;
+    private DefaultResolver $defaultResolver;
+    private bool $debugMode = false;
 
     /**
      * Api constructor.

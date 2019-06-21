@@ -12,11 +12,8 @@ use MongoDB\Model\BSONDocument;
 
 class MongoDbMeetupRepository implements MeetupRepository
 {
-    /** @var Client */
-    private $client;
-
-    /** @var Collection */
-    private $collection;
+    private Client $client;
+    private Collection $collection;
 
     /**
      * MongoDbMeetupRepository constructor.
