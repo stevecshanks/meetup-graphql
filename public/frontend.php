@@ -10,32 +10,32 @@ $twig = new Twig_Environment($loader);
 $client = new Client();
 
 $query = <<<GRAPHQL
-query {
-  meetups {
-    edges {
-      node {
-        name
-        start
-        location {
-          companyName
-          address
-          city
-          postcode
-        }
-        organiser {
-          name
-        }
-        attendees {
-          edges {
-            node {
-              id
+    query {
+      meetups {
+        edges {
+          node {
+            name
+            start
+            location {
+              companyName
+              address
+              city
+              postcode
+            }
+            organiser {
+              name
+            }
+            attendees {
+              edges {
+                node {
+                  id
+                }
+              }
             }
           }
         }
       }
     }
-  }
-}
 GRAPHQL;
 
 $response = $client->post('http://graphql:8080', [

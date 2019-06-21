@@ -28,7 +28,7 @@ class MeetupMutationTest extends GraphQLTestCase
                 }
               }
             }
-GRAPHQL;
+        GRAPHQL;
 
         $result = $this->query($query);
 
