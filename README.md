@@ -1,6 +1,6 @@
 # meetup-graphql
 
-[![Build Status](https://scrutinizer-ci.com/g/stevecshanks/meetup-graphql/badges/build.png?b=master)](https://scrutinizer-ci.com/g/stevecshanks/meetup-graphql/build-status/master)
+[![Build Status](https://scrutinizer-ci.com/g/stevecshanks/meetup-graphql/badges/build.png?b=main)](https://scrutinizer-ci.com/g/stevecshanks/meetup-graphql/build-status/main)
 
 Learning GraphQL by creating an API for a Meetup.com clone.
 
