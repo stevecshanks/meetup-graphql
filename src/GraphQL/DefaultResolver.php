@@ -8,8 +8,7 @@ use GraphQLRelay\Relay;
 
 class DefaultResolver implements Resolver
 {
-    /** @var ResolverRegistry */
-    private $resolverRegistry;
+    private ResolverRegistry $resolverRegistry;
 
     /**
      * FieldResolver constructor.

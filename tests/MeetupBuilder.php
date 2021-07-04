@@ -63,9 +63,7 @@ class MeetupBuilder
     public function withAttendees(array $attendees): MeetupBuilder
     {
         $this->attendeeIds = array_map(
-            function (Person $attendee) {
-                return $attendee->getId();
-            },
+            fn(Person $attendee) => $attendee->getId(),
             $attendees
         );
 

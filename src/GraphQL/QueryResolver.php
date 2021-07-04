@@ -7,11 +7,8 @@ use MeetupQL\Domain\PersonRepository;
 
 class QueryResolver extends DefaultResolver
 {
-    /** @var MeetupRepository */
-    private $meetupRepository;
-
-    /** @var PersonRepository */
-    private $personRepository;
+    private MeetupRepository $meetupRepository;
+    private PersonRepository $personRepository;
 
     /**
      * QueryResolver constructor.

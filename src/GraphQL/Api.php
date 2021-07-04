@@ -12,20 +12,11 @@ use MeetupQL\Domain\PersonRepository;
 
 class Api
 {
-    /** @var MeetupRepository */
-    private $meetupRepository;
-
-    /** @var PersonRepository */
-    private $personRepository;
-
-    /** @var Schema */
-    private $schema;
-
-    /** @var DefaultResolver */
-    private $defaultResolver;
-
-    /** @var bool */
-    private $debugMode = false;
+    private MeetupRepository $meetupRepository;
+    private PersonRepository $personRepository;
+    private Schema $schema;
+    private DefaultResolver $defaultResolver;
+    private bool $debugMode = false;
 
     /**
      * Api constructor.
@@ -76,9 +67,7 @@ class Api
 
         $typeConfigDecorator = function ($typeConfig) {
             if ($typeConfig['name'] === 'Node') {
-                $typeConfig['resolveType'] = function ($value) {
-                    return GlobalId::typeOf($value->getId());
-                };
+                $typeConfig['resolveType'] = fn($value) => GlobalId::typeOf($value->getId());
             }
             return $typeConfig;
         };

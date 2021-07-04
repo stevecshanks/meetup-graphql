@@ -4,26 +4,15 @@ namespace MeetupQL\Domain;
 
 class Meetup
 {
-    /** @var string */
-    private $id;
-
-    /** @var string */
-    private $name;
-
-    /** @var Address */
-    private $location;
-
-    /** @var string */
-    private $start;
-
-    /** @var string */
-    private $organiserId;
-
-    /** @var string */
-    private $presenterId;
+    private string $id;
+    private string $name;
+    private Address $location;
+    private string $start;
+    private string $organiserId;
+    private string $presenterId;
 
     /** @var string[] */
-    private $attendeeIds;
+    private array $attendeeIds;
 
     /**
      * Meetup constructor.

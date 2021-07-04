@@ -4,17 +4,10 @@ namespace MeetupQL\Domain;
 
 final class Address
 {
-    /** @var string */
-    private $companyName;
-
-    /** @var string */
-    private $address;
-
-    /** @var string */
-    private $city;
-
-    /** @var string */
-    private $postcode;
+    private string $companyName;
+    private string $address;
+    private string $city;
+    private string $postcode;
 
     /**
      * Address constructor.

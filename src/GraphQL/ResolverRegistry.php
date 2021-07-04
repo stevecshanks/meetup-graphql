@@ -5,7 +5,7 @@ namespace MeetupQL\GraphQL;
 class ResolverRegistry
 {
     /** @var Resolver[] */
-    private $resolvers;
+    private array $resolvers;
 
     public function __construct()
     {

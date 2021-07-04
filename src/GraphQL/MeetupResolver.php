@@ -7,8 +7,7 @@ use MeetupQL\Domain\PersonRepository;
 
 class MeetupResolver extends DefaultResolver
 {
-    /** @var PersonRepository */
-    private $personRepository;
+    private PersonRepository $personRepository;
 
     /**
      * MeetupResolver constructor.
@@ -35,9 +34,7 @@ class MeetupResolver extends DefaultResolver
     {
         return $this->connectionTo(
             array_map(
-                function (string $id) {
-                    return $this->personRepository->findById($id);
-                },
+                fn(string $id) => $this->personRepository->findById($id),
                 $meetup->getAttendeeIds()
             ),
             $args

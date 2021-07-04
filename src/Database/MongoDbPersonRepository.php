@@ -10,11 +10,8 @@ use MongoDB\Model\BSONDocument;
 
 class MongoDbPersonRepository implements PersonRepository
 {
-    /** @var Client */
-    private $client;
-
-    /** @var Collection */
-    private $collection;
+    private Client $client;
+    private Collection $collection;
 
     /**
      * MongoDbPersonRepository constructor.
